@@ -1,0 +1,17 @@
+{
+  "name": "root",
+  "private": true,
+  "scripts": {
+    "clean": "lerna clean",
+    "nuke": "rimraf ./node_modules && yarn run clean",
+    "bootstrap": "lerna bootstrap",
+    "start": "lerna run --parallel start"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {
+    "lerna": "^3.22.1",
+    "rimraf": "3.0.2"
+  }
+}
