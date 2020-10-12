@@ -1,6 +1,8 @@
 import { registerApplication, start } from 'single-spa';
 import { constructApplications, constructLayoutEngine, constructRoutes } from 'single-spa-layout';
 
+import { planSlice, store } from './store';
+
 const routes = constructRoutes(
   document.querySelector("#single-spa-layout") as HTMLTemplateElement
 );
@@ -12,6 +14,14 @@ const applications = constructApplications({
 });
 const layoutEngine = constructLayoutEngine({ routes, applications });
 
-applications.forEach(registerApplication);
+applications.forEach(application => registerApplication({
+  ...application,
+  customProps: {
+    store,
+    slices: {
+      planSlice
+    }
+  }
+}));
 layoutEngine.activate();
 start();
